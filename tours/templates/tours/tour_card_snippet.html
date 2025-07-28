@@ -1,0 +1,17 @@
+{% load static %}
+{% for tour in tours %}
+<div class="tour-card">
+    <a href="{% url 'tour_detail' tour.id %}">
+        {% if tour.main_image %}
+        <img src="{{ tour.main_image.url }}" alt="{{ tour.name }}">
+        {% else %}
+        <img src="{% static 'tours/images/default_tour.jpg' %}" alt="Default tour image">
+        {% endif %}
+        <div class="tour-card-content">
+            <h3>{{ tour.name }}</h3>
+            <p>{{ tour.description|striptags|truncatewords:15 }}</p>
+            <span class="tour-card-price">From ${{ tour.packages.first.price|floatformat:0 }}</span>
+        </div>
+    </a>
+</div>
+{% endfor %}

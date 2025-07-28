@@ -1,0 +1,77 @@
+{% extends 'tours/base.html' %}
+{% load static %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block content %}
+
+<div class="page-banner" style="background-image: url('{{ post.featured_image.url }}');">
+    <div class="container text-center">
+        <h1 class="page-banner-title">{{ post.title }}</h1>
+    </div>
+</div>
+
+<div class="container section-padding">
+    <div class="row g-5">
+
+        <div class="col-lg-8">
+            <p class="text-muted mb-4">
+                By {{ post.author.username }} on {{ post.created_at|date:"F d, Y" }} in <a href="#">{{ post.category.name }}</a>
+            </p>
+            <div class="blog-content">
+                {{ post.content|safe }}
+            </div>
+            
+            {% if post.related_tours.all %}
+            <hr class="my-5">
+            <h3 class="mb-4">Related Tours</h3>
+            <div class="horizontal-scroll-container">
+                <div class="horizontal-scroll-wrapper">
+                    {% for tour in post.related_tours.all %}
+                    <div class="scroll-item">
+                        <div class="card h-100">
+                            <img src="{{ tour.category.image.url }}" class="card-img-top" alt="{{ tour.name }}">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ tour.name }}</h5>
+                                <a href="{% url 'tour_detail' tour.id %}" class="btn btn-sm btn-outline-primary">View Tour</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-4">
+            <div class="sidebar-container p-3">
+                {% if similar_posts %}
+                <div class="sidebar-widget mb-4">
+                    <h5 class="widget-title">Similar Posts</h5>
+                    {% for s_post in similar_posts %}
+                    <a href="{% url 'blog_detail' s_post.slug %}" class="sidebar-post-item">
+                        <img src="{{ s_post.featured_image.url }}" alt="{{ s_post.title }}">
+                        <h6>{{ s_post.title }}</h6>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if categories %}
+                <div class="sidebar-widget mb-4">
+                    <h5 class="widget-title">Tour Categories</h5>
+                    <div class="category-widget-list">
+                        {% for category in categories %}
+                        <a href="#" class="category-widget-item">
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                            <span>{{ category.name }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

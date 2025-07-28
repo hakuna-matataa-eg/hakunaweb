@@ -1,0 +1,44 @@
+{% extends 'tours/base.html' %}
+{% load static %}
+
+{% block title %}Our Blog - Hakuna Matata Tours{% endblock %}
+
+{% block content %}
+
+<div class="page-banner blog-banner" style="background-image: url('{% static 'tours/images/blog_banner.jpg' %}');">
+        <div class="container text-center text-white">
+        <h1 class="display-4 fw-bold">Our Blog</h1>
+        <p class="lead">Stay updated with our latest travel tips and stories from Egypt.</p>
+    </div>
+</div>
+
+<div class="container section-padding content-after-banner">    <div class="row g-4">
+        {% for post in posts %}
+<div class="col-12 mb-4">
+    <div class="card blog-card-horizontal shadow-sm">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ post.featured_image.url }}" class="img-fluid rounded-start" alt="{{ post.title }}">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text text-muted small">
+                        By {{ post.author.username }} on {{ post.created_at|date:"F d, Y" }}
+                    </p>
+                    <p class="card-text">{{ post.content|striptags|truncatewords:30 }}</p>
+                    <a href="{% url 'blog_detail' post.slug %}" class="btn btn-primary mt-auto align-self-start">Read More</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% empty %}
+<div class="col-12">
+    <p class="text-center">No blog posts yet.</p>
+</div>
+{% endfor %}
+    </div>
+</div>
+
+{% endblock %}

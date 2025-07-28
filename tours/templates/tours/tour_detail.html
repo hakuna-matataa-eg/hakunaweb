@@ -1,0 +1,285 @@
+{% extends 'tours/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="page-banner" style="background-image: url('{{ tour.category.image.url }}');">
+    <div class="container text-center text-white">
+        <h1 class="display-4 fw-bold">{{ tour.name }}</h1>
+        <a href="#details" class="btn btn-warning mt-4 px-5 py-2 rounded-pill">Explore More</a>
+    </div>
+</div>
+
+<section class="container py-5">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="section-title">Photo Gallery</h2>
+    <button class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#photoModal">View All Photos</button>
+  </div>
+  <div class="row">
+    {% for image in all_trip_images|slice:":8" %}
+      <div class="col-6 col-md-3 mb-3">
+        <img src="{{ image.image.url }}" class="img-fluid rounded shadow-sm" alt="Gallery Image">
+      </div>
+    {% endfor %}
+  </div>
+</section>
+
+<div class="container py-5" id="details">
+    <div class="row g-5">
+        <div class="col-lg-8">
+            <h3>About This Tour</h3>
+            <p>{{ tour.description|linebreaks }}</p>
+
+            <div class="py-4">
+                <h3 class="mb-4">Daily Itinerary</h3>
+                <div class="accordion" id="itineraryAccordion">
+                    {% for day in tour.itinerary_days.all %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ forloop.counter }}">
+                                Day {{ day.day_number }}: {{ day.title }}
+                            </button>
+                        </h2>
+                        <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#itineraryAccordion">
+                            <div class="accordion-body">
+                                <div class="row align-items-center">
+                                    <div class="col-md-4 mb-3 mb-md-0">
+                                        <img src="{{ day.image.url }}" alt="{{ day.title }}" class="img-fluid rounded shadow">
+                                    </div>
+                                    <div class="col-md-8">
+                                        <p>{{ day.description|linebreaks }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% empty %}
+                        <p class="text-center">No detailed itinerary available for this tour yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="py-4">
+                <h3 class="mb-4">Included Amenities</h3>
+                <div class="row">
+                    {% for amenity in tour.amenities.all %}
+                    <div class="col-6 col-md-4 mb-3 text-center">
+                        <i class="{{ amenity.icon }} fa-2x mb-2 d-block"></i> 
+                        <div>{{ amenity.name }}</div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <div class="sidebar-container">
+                {% if similar_tours %}
+                <div class="sidebar-widget mb-4">
+                    <h5 class="widget-title">You May Also Like</h5>
+                    {% for sim_tour in similar_tours %}
+                    <a href="{% url 'tour_detail' sim_tour.id %}" class="d-flex align-items-center mb-3 text-decoration-none">
+                        <img src="{{ sim_tour.category.image.url }}" alt="{{ sim_tour.name }}" class="me-3" style="width: 80px; height: 60px; object-fit: cover; border-radius: 5px;">
+                        <div class="text-dark fw-bold">{{ sim_tour.name }}</div>
+                    </a>
+                    {% endfor %}
+                </div>
+                {% endif %}
+
+                <div class="sidebar-widget mb-4">
+                    <h5 class="widget-title">Tour Categories</h5>
+                    <div class="category-widget-list">
+                        {% for category in categories %}
+                        <a href="{% url 'category_detail' category.id %}" class="category-widget-item">
+                            <img src="{{ category.image.url }}" alt="{{ category.name }}">
+                            <span>{{ category.name }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="sidebar-widget">
+                    <h5 class="widget-title">Have Questions?</h5>
+                    <div class="accordion" id="sidebarFaq">
+                        {% for faq in faqs|slice:":3" %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq-sidebar-{{ forloop.counter }}">
+                                    {{ faq.question }}
+                                </button>
+                            </h2>
+                            <div id="faq-sidebar-{{ forloop.counter }}" class="accordion-collapse collapse" data-bs-parent="#sidebarFaq">
+                                <div class="accordion-body">{{ faq.answer }}</div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container py-5 bg-light">
+    <h2 class="text-center mb-5 section-title">Tour Packages</h2>
+    <div class="row g-4 justify-content-center">
+        {% for package in packages %}
+        <div class="col-md-6 col-lg-4">
+            <div class="package-card">
+                {% if package.main_package_image %}
+                <img src="{{ package.main_package_image.url }}" class="package-card-img" alt="{{ package.name }}">
+                {% else %}
+                <img src="{% static 'tours/images/default_package.jpg' %}" class="package-card-img" alt="Default Image">
+                {% endif %}
+                <div class="package-card-body">
+                    <h5 class="package-card-title">{{ package.name }}</h5>
+                    <div class="package-card-price">{{ package.price }} USD</div>
+                    <ul class="package-card-benefits">
+                        <li>Sleeps: {{ package.sleeps }}</li>
+                        {{ package.benefits|linebreaks }}
+                    </ul>
+                    <div class="d-flex gap-2 mt-auto">
+                        <a href="#booking-form" class="btn btn-warning w-100 fw-bold">Book Now</a>
+                        <button type="button" class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#packageModal{{ package.id }}">
+                            Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <p class="text-center">No packages available for this tour at the moment.</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="container py-5" id="booking-form">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-7">
+            <div class="bg-white p-4 p-md-5 rounded shadow-lg text-center">
+                <h3 class="mb-4 fw-bold">Inquire About This Tour</h3>
+                {% if messages %}{% for message in messages %}<div class="alert alert-success">{{ message }}</div>{% endfor %}{% endif %}
+                <form method="POST" action="{% url 'tour_detail' tour.id %}#booking-form">
+                    {% csrf_token %}
+                    <div class="row g-3">
+                        <div class="col-md-12 form-floating">
+                            {{ form.full_name }}
+                            <label for="{{ form.full_name.id_for_label }}" class="ms-2">Full Name</label>
+                        </div>
+                        <div class="col-md-6 form-floating">
+                            {{ form.email }}
+                            <label for="{{ form.email.id_for_label }}" class="ms-2">Email Address</label>
+                        </div>
+                        <div class="col-md-6 form-floating">
+                            {{ form.phone_number }}
+                            <label for="{{ form.phone_number.id_for_label }}" class="ms-2">Phone Number</label>
+                        </div>
+                        <div class="col-md-12 form-floating">
+                              {{ form.country }}
+                              <label for="{{ form.country.id_for_label }}" class="ms-2">Country</label>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.num_adults.id_for_label }}" class="form-label float-start">Adults</label>
+                            {{ form.num_adults }}
+                        </div>
+                        <div class="col-md-6">
+                            <label for="{{ form.num_children.id_for_label }}" class="form-label float-start">Children</label>
+                            {{ form.num_children }}
+                        </div>
+                        <div class="col-md-12">
+                            <label for="{{ form.package.id_for_label }}" class="form-label float-start mt-2">Select a Package (optional)</label>
+                            {{ form.package }}
+                        </div>
+                        <div class="col-md-12 form-floating">
+                            {{ form.special_requests }}
+                            <label for="{{ form.special_requests.id_for_label }}" class="ms-2">Special Requests</label>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-warning w-100 fw-bold py-3 mt-4">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="photoModal" tabindex="-1" aria-labelledby="photoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="photoModalLabel">All Photos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          {% for image in all_trip_images %}
+            <div class="col-6 col-md-3 mb-3">
+              <img src="{{ image.image.url }}" class="img-fluid rounded" alt="Gallery Image">
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% for package in packages %}
+<div class="modal fade" id="packageModal{{ package.id }}" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ package.name }} - Details</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="carousel{{ package.id }}" class="carousel slide mb-4" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        {% for image_obj in package.all_package_images %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ image_obj.image.url }}" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Package Image">
+                        </div>
+                        {% empty %}
+                        <div class="carousel-item active">
+                             <img src="{% static 'tours/images/default_package.jpg' %}" class="d-block w-100" style="height: 400px; object-fit: cover;" alt="Default Image">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% if package.all_package_images|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carousel{{ package.id }}" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carousel{{ package.id }}" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                    {% endif %}
+                </div>
+
+                <h4>Includes accommodation in:</h4>
+                <ul>
+                    {% for boat in package.boats.all %}
+                        <li>{{ boat.name }}</li>
+                    {% endfor %}
+                    {% for hotel in package.hotels.all %}
+                        <li>{{ hotel.name }}</li>
+                    {% endfor %}
+                </ul>
+                <hr>
+
+                <h4>Amenities in this Package:</h4>
+                <div class="d-flex flex-wrap gap-3">
+                    {% for amenity in package.amenities.all %}
+                    <div><i class="{{ amenity.icon }}"></i> {{ amenity.name }}</div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <a href="#booking-form" class="btn btn-warning">Book This Package Now</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock %}

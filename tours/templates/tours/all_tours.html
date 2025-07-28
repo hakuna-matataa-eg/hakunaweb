@@ -1,0 +1,47 @@
+{% extends 'tours/base.html' %}
+{% load static %}
+
+{% block title %}All Tours - Hakuna Matata{% endblock %}
+
+{% block content %}
+<section class="page-banner" style="background-image: url('{% static 'tours/images/blog_banner.jpg' %}');">
+    <div class="container">
+        <h1>Explore All Our Tours</h1>
+    </div>
+</section>
+
+<div class="container section-padding">
+    <div class="all-tours-layout">
+        
+        <aside class="filter-sidebar">
+            <h4>Filter by Destination</h4>
+            <form method="GET" action="{% url 'all_tours' %}">
+                <ul class="filter-list">
+                    <li>
+                        <a href="{% url 'all_tours' %}" class="filter-link">All Destinations</a>
+                    </li>
+                    {% for category in categories %}
+                    <li>
+                        <button type="submit" name="category" value="{{ category.id }}" class="filter-link-button">
+                            {{ category.name }}
+                        </button>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            </aside>
+        
+        <main class="tours-grid-main">
+                    <div class="tour-card-grid" id="tour-grid-container">
+                        {% include 'tours/tour_card_snippet.html' with tours=tours %}
+                    </div>
+
+                    {% if tours.has_next %}
+                    <div class="load-more-container">
+                        <button id="load-more-btn" data-page="{{ tours.next_page_number }}">Explore more</button>
+                    </div>
+                    {% endif %}
+                </main>        
+    </div>
+</div>
+{% endblock %}

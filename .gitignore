@@ -1,0 +1,17 @@
+# Environment variables
+.env
+
+# Django files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+/media/
+
+# Static files collected by collectstatic
+/staticfiles/
+
+# Virtual Environment
+venv/

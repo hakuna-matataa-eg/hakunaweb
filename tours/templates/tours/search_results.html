@@ -1,0 +1,46 @@
+{% extends 'tours/base.html' %}
+{% load static %}
+
+{% block title %}Search Results for "{{ query }}"{% endblock %}
+
+{% block content %}
+
+<div class="container section-padding">
+    <div class="text-center mb-5">
+        <h1>Search Results</h1>
+        {% if query %}
+            <p class="lead">Showing results for: <strong>"{{ query }}"</strong></p>
+        {% endif %}
+    </div>
+
+    <div class="horizontal-scroll-container">
+        <div class="horizontal-scroll-wrapper">
+            {% for tour in tours %}
+            <div class="scroll-item">
+                <div class="card h-100">
+                    <a href="{% url 'tour_detail' tour.id %}" class="text-decoration-none">
+                        {% if tour.main_tour_image %}
+                        <img src="{{ tour.main_tour_image.url }}" class="card-img-top" alt="{{ tour.name }}">
+                        {% elif tour.category.image %}
+                        <img src="{{ tour.category.image.url }}" class="card-img-top" alt="{{ tour.name }}">
+                        {% else %}
+                        <img src="{% static 'tours/images/default_tour.jpg' %}" class="card-img-top" alt="Default Image">
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title">{{ tour.name }}</h5>
+                            <p class="card-text">{{ tour.description|striptags|truncatewords:15 }}</p>
+                            <div class="btn btn-primary mt-auto align-self-start">View Details</div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12 text-center">
+                <p>Sorry, no tours found matching your search criteria. Please try a different keyword.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
