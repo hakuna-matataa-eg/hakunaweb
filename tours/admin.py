@@ -54,10 +54,10 @@ class HotelAdmin(admin.ModelAdmin):
 
 @admin.register(TourPackage)
 class TourPackageAdmin(admin.ModelAdmin):
-    list_display = ('name', 'tour', 'category')
-    list_filter = ('tour', 'category')
+    list_display = ('name', 'category')
+    list_filter = ('category',)
     # هذا هو الجزء الأهم: يسمح بالاختيار المتعدد للمراكب والفنادق والرفاهيات
-    filter_horizontal = ('boats', 'hotels', 'amenities',)
+    filter_horizontal = ('boats', 'hotels', 'amenities', 'tour')
 
 @admin.register(BlogPost)
 class BlogPostAdmin(admin.ModelAdmin):

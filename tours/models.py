@@ -110,7 +110,7 @@ class PackageCategory(models.Model):
         return self.name
 
 class TourPackage(models.Model):
-    tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='packages')
+    tour = models.ManyToManyField(Tour, related_name='packages')
     category = models.ForeignKey(PackageCategory, on_delete=models.SET_NULL, null=True, related_name='packages')
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=True)

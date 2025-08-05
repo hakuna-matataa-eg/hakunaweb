@@ -10,10 +10,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- إعدادات حساسة من .env ---
 SECRET_KEY = config('SECRET_KEY')
-DEBUG = config('DEBUG', default=False, cast=bool)
+
+# ==================== التعديل الأهم ====================
+# قمنا بتثبيت قيمة DEBUG على True لبيئة التطوير المحلية
+DEBUG = True
+# ======================================================
+
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS',
-    default='127.0.0.1,localhost',
+    default='127.0.0.1,localhost,staging.hakuna-matataa.com', # تمت إضافة نطاق التطوير
     cast=lambda v: [s.strip() for s in v.split(',')]
 )
 
@@ -47,13 +52,14 @@ ROOT_URLCONF = 'hakuna_matata_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],  # لو عندك مجلد templates رئيسي
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+                'django.contrib.messages.context_processors.messages', # This is the corrected line
                 'tours.context_processors.booking_form_context',
             ],
         },
@@ -85,15 +91,17 @@ USE_TZ = True
 
 # --- إعدادات الملفات الثابتة والميديا ---
 STATIC_URL = '/static/'
-STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATIC_ROOT = BASE_DIR / 'staticfiles' # للإنتاج فقط
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
-# لو عندك مجلد static إضافي أثناء التطوير
+# ==================== التعديل الثاني ====================
+# هذا هو المسار الصحيح الذي سيبحث فيه جانغو عن ملفاتك الثابتة
 STATICFILES_DIRS = [
-    BASE_DIR / "static",
+    os.path.join(BASE_DIR, 'static'),
 ]
+# ======================================================
 
 # --- إعدادات CKEditor ---
 CKEDITOR_UPLOAD_PATH = "uploads/"
