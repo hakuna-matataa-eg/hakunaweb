@@ -1,0 +1,13 @@
+Hello {{ name|default:"Traveler" }},
+
+We received your booking request. Our team will contact you shortly.
+
+Tour: {{ tour_name }}
+Phone: {{ phone|default:"-" }}
+Guests: {{ guests|default:"-" }}
+Date: {{ date|default:"-" }}
+
+If any detail is incorrect, just reply to this email and tell us the changes.
+
+Hakuna Matata Tours
+https://hakuna-matataa.com
