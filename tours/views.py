@@ -10,6 +10,7 @@ from django.db.models import Q
 from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from .models import (
     Tour, Category, Activity, BlogPost, BlogCategory,
@@ -584,3 +585,132 @@ def privacy_policy_view(request):
 def terms_view(request):
     return render(request, 'tours/terms.html')
 
+@csrf_exempt
+def transfers_booking(request):
+    """
+    Booking view for transfers (pickup/dropoff + car type + coords).
+    Sends email to admin and confirmation email to client.
+    """
+    if request.method == "POST":
+        data = request.POST
+
+        # ==== بيانات الفورم ====
+        name        = data.get("full_name", "")
+        email       = data.get("email", "")
+        phone       = data.get("phone", "")
+        pickup      = data.get("pickup", "")
+        dropoff     = data.get("dropoff", "")
+        pickup_lat  = data.get("pickup_lat", "")
+        pickup_lon  = data.get("pickup_lon", "")
+        drop_lat    = data.get("dropoff_lat", "")
+        drop_lon    = data.get("dropoff_lon", "")
+        date        = data.get("date", "")
+        time        = data.get("time", "")
+        passengers  = data.get("passengers", "")
+        car_type    = data.get("car_type", "")
+        distance    = data.get("distance", "")
+        price       = data.get("price", "")
+
+        # ===== 1) إيميل الإدارة (Plain text) =====
+        admin_lines = [
+            "🚖 New Transfer Booking Request",
+            f"Pickup: {pickup or '-'} (Lat: {pickup_lat}, Lon: {pickup_lon})",
+            f"Drop-off: {dropoff or '-'} (Lat: {drop_lat}, Lon: {drop_lon})",
+            f"Date: {date or '-'}",
+            f"Time: {time or '-'}",
+            f"Passengers: {passengers or '-'}",
+            f"Car Type: {car_type or '-'}",
+            f"Distance: {distance or '-'} km",
+            f"Price: {price or '-'} EGP",
+            f"Name: {name or '-'}",
+            f"Email: {email or '-'}",
+            f"Phone: {phone or '-'}",
+        ]
+        admin_body = "\n".join(admin_lines)
+
+        try:
+            EmailMessage(
+                subject="New Transfer Booking Request",
+                body=admin_body,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                to=[settings.DEFAULT_FROM_EMAIL],
+                reply_to=[email] if email else []
+            ).send(fail_silently=False)
+        except Exception as e:
+            messages.warning(request, f'Booking saved, but admin email failed: {e}')
+
+        # ===== 2) إيميل العميل (HTML + نص بديل) =====
+        if email:
+            ctx = {
+                'name': name or 'Traveler',
+                'tour_name': 'Private Transfer',
+                'phone': phone,
+                'guests': f"{passengers} pax",
+                'date': f"{date} {time}",
+                'package_name': car_type,
+                'special_requests': f"Pickup: {pickup} → Drop-off: {dropoff} ({distance} km, {price} EGP)",
+                'logo_url': 'https://hakuna-matataa.com/static/images/Blue%20and%20Yellow%20Simple%20Travel%20Logo.png',
+                'brand_color': '#0ea5e9',
+                'site_url': 'https://hakuna-matataa.com',
+            }
+
+            try:
+                html_content = render_to_string('tours/booking_confirmation.html', ctx)
+            except TemplateDoesNotExist:
+                html_content = None
+            except Exception:
+                html_content = None
+
+            text_body = "\n".join([
+                f"Hello {ctx['name']},",
+                "",
+                "We received your transfer booking request:",
+                f"Pickup: {pickup} ({pickup_lat}, {pickup_lon})",
+                f"Drop-off: {dropoff} ({drop_lat}, {drop_lon})",
+                f"Date: {date} at {time}",
+                f"Passengers: {passengers}",
+                f"Car: {car_type}",
+                f"Distance: {distance} km",
+                f"Price: {price} EGP",
+                "",
+                "Hakuna Matata Tours",
+                ctx['site_url'],
+            ])
+
+            try:
+                if html_content:
+                    email_msg = EmailMultiAlternatives(
+                        subject="Your Transfer Booking – Hakuna Matata Tours",
+                        body=text_body,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        to=[email],
+                        reply_to=[settings.DEFAULT_FROM_EMAIL],
+                    )
+                    email_msg.attach_alternative(html_content, "text/html")
+                    email_msg.send(fail_silently=False)
+                else:
+                    EmailMessage(
+                        subject="Your Transfer Booking – Hakuna Matata Tours",
+                        body=text_body,
+                        from_email=settings.DEFAULT_FROM_EMAIL,
+                        to=[email],
+                        reply_to=[settings.DEFAULT_FROM_EMAIL],
+                    ).send(fail_silently=False)
+            except Exception as e:
+                messages.warning(request, f'Confirmation email failed: {e}')
+
+        # ✅ هنا الشرط المظبوط
+        if request.headers.get("x-requested-with") == "XMLHttpRequest":
+            return JsonResponse({"success": True})
+
+        messages.success(request, "Your transfer booking request has been sent successfully!")
+        return redirect('transfers')
+
+    return redirect('/')
+
+
+def transfers(request):
+    """
+    صفحة الفورم الخاصة بالتنقلات
+    """
+    return render(request, "tours/transfers.html")

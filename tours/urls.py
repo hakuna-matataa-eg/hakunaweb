@@ -15,4 +15,6 @@ urlpatterns = [
     path('search/', views.search_results, name='search_results'),
     path('privacy-policy/', views.privacy_policy_view, name='privacy_policy'),
     path('terms-and-conditions/', views.terms_view, name='terms'),
+    path("transfers/", views.transfers, name="transfers"),
+    path("transfers/booking/", views.transfers_booking, name="transfers_booking"),
 ]
