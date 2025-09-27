@@ -17,7 +17,7 @@ from .models import (
     Hotel, HotelLocation, HotelImage, CategoryGalleryImage,
     TourPackage, Amenity, FAQ, Boat, BoatImage
 )
-from .forms import BookingForm, ContactForm, GeneralBookingForm, CategoryBookingForm
+from .forms import BookingForm, ContactForm, GeneralBookingForm, CategoryBookingForm, CaptchaOnlyForm
 
 # ==========================================================
 
@@ -592,6 +592,11 @@ def transfers_booking(request):
     Sends email to admin and confirmation email to client.
     """
     if request.method == "POST":
+        form = CaptchaOnlyForm(request.POST)
+        if not form.is_valid():
+            # إذا فشل التحقق، أرجع خطأ
+            return JsonResponse({"success": False, "error": "Invalid CAPTCHA"})
+        # --- ^ نهاية الجزء الجديد ^ ---
         data = request.POST
 
         # ==== بيانات الفورم ====
@@ -610,6 +615,7 @@ def transfers_booking(request):
         car_type    = data.get("car_type", "")
         distance    = data.get("distance", "")
         price       = data.get("price", "")
+        
 
         # ===== 1) إيميل الإدارة (Plain text) =====
         admin_lines = [
@@ -713,4 +719,5 @@ def transfers(request):
     """
     صفحة الفورم الخاصة بالتنقلات
     """
-    return render(request, "tours/transfers.html")
+    form = CaptchaOnlyForm()
+    return render(request, "tours/transfers.html", {'form': form})

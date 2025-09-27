@@ -107,13 +107,14 @@
     <input type="hidden" name="dropoff_lat" id="dropoff_lat" required>
     <input type="hidden" name="dropoff_lon" id="dropoff_lon" required>
 
-    <!-- Price Box -->
     <div class="price-box p-3 border rounded mb-3">
       <p>Estimated Price: <span id="price">—</span> EGP</p>
       <p>Distance: <span id="distance">—</span> km</p>
     </div>
 
-    <!-- Book -->
+    <div class="form-group mb-3 d-flex justify-content-center">
+        {{ form.captcha }}
+    </div>
     <button type="button" id="submitBtn" class="btn btn-warning w-100">Book Now</button>
   </form>
 </div>

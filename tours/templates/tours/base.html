@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
 
@@ -111,7 +112,9 @@
       <div class="modal-body">
         <form method="POST" action="{% url 'book_now' %}">
             {% csrf_token %}
-            {{ general_booking_form.as_p }} 
+            {{ general_booking_form.as_p }}
+            <div class="d-flex justify-content-center mt-3"> {{ general_booking_form.captcha }}
+            </div>
             <button type="submit" class="btn btn-warning w-100 mt-3">Submit</button>
         </form>
       </div>

@@ -25,6 +25,8 @@
                 <form method="POST" class="contact-form">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    <div class="d-flex justify-content-center mt-3"> {{ form.captcha }}
+                    </div>
                     <button type="submit" class="btn-primary mt-3">Send Message</button>
                 </form>
             </div>

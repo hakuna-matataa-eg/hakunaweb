@@ -196,6 +196,10 @@
                             {{ form.special_requests }}
                             <label for="{{ form.special_requests.id_for_label }}" class="ms-2">Special Requests</label>
                         </div>
+                        
+                        <div class="col-md-12 mt-3 d-flex justify-content-center"> {{ form.captcha }}
+                        </div>
+
                     </div>
                     <button type="submit" class="btn btn-warning w-100 fw-bold py-3 mt-4">Submit Inquiry</button>
                 </form>

@@ -2,11 +2,13 @@
 
 from django import forms
 from .models import Booking, Tour, TourPackage, HotelBooking, Hotel
+from captcha.fields import CaptchaField  # <--- هذا هو السطر الناقص الذي يجب إضافته
 
 # =================================================================
 #  النموذج الخاص بصفحة تفاصيل الرحلة
 # =================================================================
 class BookingForm(forms.ModelForm):
+    captcha = CaptchaField()  # <--- ٢. أضف هذا السطر
     class Meta:
         model = Booking
         fields = [
@@ -39,6 +41,7 @@ class BookingForm(forms.ModelForm):
 #  النموذج العام الخاص بالنافذة المنبثقة (Modal)
 # =================================================================
 class GeneralBookingForm(forms.ModelForm):
+    captcha = CaptchaField()
     # نضيف حقل الرحلات هنا ليظهر كقائمة منسدلة
     tour = forms.ModelChoiceField(
         queryset=Tour.objects.all(),
@@ -67,8 +70,11 @@ class ContactForm(forms.Form):
     email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control', 'placeholder': 'Your Email'}))
     subject = forms.CharField(max_length=100, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Subject'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 5, 'placeholder': 'Your Message'}))   
+    captcha = CaptchaField()
 
 class CategoryBookingForm(forms.ModelForm):
+    captcha = CaptchaField()  # <--- ٥. أضف هذا السطر
+
     class Meta:
         model = HotelBooking
         fields = [
@@ -91,3 +97,6 @@ class CategoryBookingForm(forms.ModelForm):
         # إضافة تنسيقات Bootstrap
         for field_name, field in self.fields.items():
             field.widget.attrs.update({'class': 'form-control'})        
+
+class CaptchaOnlyForm(forms.Form):
+    captcha = CaptchaField()

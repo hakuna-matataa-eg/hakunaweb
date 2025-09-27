@@ -33,6 +33,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
+    'captcha',  # <--- أضف هذا السطر
+
 ]
 
 # --- الوسيطات ---
@@ -124,3 +126,7 @@ EMAIL_USE_TLS = config('EMAIL_USE_TLS', cast=bool, default=False)
 EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=config('EMAIL_HOST_USER', default=''))
+
+# --- إعدادات Google reCAPTCHA ---
+RECAPTCHA_PUBLIC_KEY = '6Lce9tYrAAAAAJawm8dtZb-vtp9YBQzztO9iqcb0'
+RECAPTCHA_PRIVATE_KEY = '6Lce9tYrAAAAAHSA9UzrU1h0vQbXMl5rWLd6NG60'
