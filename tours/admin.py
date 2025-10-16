@@ -39,7 +39,8 @@ class TourAdmin(admin.ModelAdmin):
     search_fields = ('name', 'destination')
     filter_horizontal = ('amenities',)
     inlines = [ItineraryDayInline, FAQInline]
-
+    fields = ('name', 'destination', 'category', 'description', 'duration_days',
+              'is_featured', 'amenities', 'card_image')
 @admin.register(Boat)
 class BoatAdmin(admin.ModelAdmin):
     list_display = ('name',)

@@ -28,9 +28,11 @@
                 <div class="scroll-item">
                     <div class="card h-100">
                         {% if tour.main_tour_image %}
-                        <img src="{{ tour.main_tour_image.url }}" class="card-img-top" alt="{{ tour.name }}">
+                        <img src="{{ tour.get_card_image_url }}" class="card-img-top" alt="{{ tour.name }}">
+
                         {% else %}
-                        <img src="{{ tour.category.image.url }}" class="card-img-top" alt="{{ tour.name }}">
+                        <img src="{{ tour.get_card_image_url }}" class="card-img-top" alt="{{ tour.name }}">
+
                         {% endif %}
                         <div class="card-body d-flex flex-column">
                             <h5 class="card-title">{{ tour.name }}</h5>
@@ -49,7 +51,7 @@
 
 <section class="tours-section section-padding bg-light">
     <div class="container">
-        <h2 class="section-title">Egypt’s Finest Coastal Destinations</h2>
+        <h2 class="section-title">Dahabiya Nile Cruise</h2>
         <div class="horizontal-scroll-container">
             <div class="horizontal-scroll-wrapper">
                 {% for tour in coastal_tours %}

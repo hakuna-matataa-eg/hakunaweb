@@ -4,9 +4,11 @@ from pathlib import Path
 import os
 from decouple import config
 import dj_database_url
-
+from dotenv import load_dotenv
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BASE_DIR / ".env")
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret")
 
 # --- إعدادات حساسة من .env ---
 SECRET_KEY = config('SECRET_KEY')
@@ -128,5 +130,9 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL', default=config('EMAIL_HOST_USER', default=''))
 
 # --- إعدادات Google reCAPTCHA ---
-RECAPTCHA_PUBLIC_KEY = '6Lce9tYrAAAAAJawm8dtZb-vtp9YBQzztO9iqcb0'
-RECAPTCHA_PRIVATE_KEY = '6Lce9tYrAAAAAHSA9UzrU1h0vQbXMl5rWLd6NG60'
+RECAPTCHA_PUBLIC_KEY = '6LfHIdcrAAAAAIw9MpzkrreIs0QJ8Rqxk4IGRqDq'
+RECAPTCHA_PRIVATE_KEY = config('RECAPTCHA_PRIVATE_KEY')
+
+PORTAL_WEBHOOK_URL = os.getenv("PORTAL_WEBHOOK_URL", "")
+PORTAL_WEBHOOK_SECRET = os.getenv("PORTAL_WEBHOOK_SECRET", "")
+PORTAL_WEBHOOK_TIMEOUT = int(os.getenv("PORTAL_WEBHOOK_TIMEOUT", "3"))

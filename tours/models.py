@@ -3,6 +3,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
+from django.templatetags.static import static
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -83,8 +84,18 @@ class Tour(models.Model):
     is_featured = models.BooleanField(default=False, help_text="لعرضها في الصفحة الرئيسية")
     # --- هذا هو الحقل الذي تم إضافته ---
     amenities = models.ManyToManyField(Amenity, blank=True, help_text="الرفاهيات الأساسية للرحلة")
+    card_image = models.ImageField(upload_to='tours/cards/', blank=True, null=True)
     def __str__(self):
         return self.name
+
+    # ✅ دالة لجلب الصورة المناسبة للكارت
+    def get_card_image_url(self):
+        if self.card_image:
+            return self.card_image.url
+        if self.category and hasattr(self.category, 'image') and self.category.image:
+            return self.category.image.url
+        return static('images/default-tour.jpg') 
+    
 
 class ItineraryDay(models.Model):
     tour = models.ForeignKey(Tour, on_delete=models.CASCADE, related_name='itinerary_days')

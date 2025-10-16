@@ -11,11 +11,12 @@ from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.utils.html import strip_tags
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
+from .utils import emit_booking_webhook
 
 from .models import (
     Tour, Category, Activity, BlogPost, BlogCategory,
     Hotel, HotelLocation, HotelImage, CategoryGalleryImage,
-    TourPackage, Amenity, FAQ, Boat, BoatImage
+    TourPackage, Amenity, FAQ, Boat, BoatImage,  Booking, HotelBooking
 )
 from .forms import BookingForm, ContactForm, GeneralBookingForm, CategoryBookingForm, CaptchaOnlyForm
 
@@ -84,10 +85,31 @@ def tour_detail(request, tour_id):
     if request.method == 'POST':
         form = BookingForm(request.POST, tour=tour)
         if form.is_valid():
+            # --- هذا هو التعديل الجذري ---
+            # أولاً، نستخرج كل البيانات النظيفة من الفورم
+            data = form.cleaned_data
+            package_obj = data.get('package')
+            
+            # ثانياً، نحفظ الحجز في قاعدة البيانات
             booking = form.save(commit=False)
             booking.tour = tour
             booking.save()
 
+            # ثالثاً، نرسل البيانات الصحيحة إلى الداشبورد
+            emit_booking_webhook(
+                request,
+                kind="tour",
+                source="website:tour_detail",
+                extra={
+                    "entity": {
+                        "booking_id": booking.id,
+                        "tour_id": tour.id,
+                        "tour_name": tour.name,
+                        # نستخدم اسم الباقة مباشرة من الكائن الذي استخرجناه
+                        "package_name": package_obj.name if package_obj else "Not Selected",
+                    }
+                },
+            )
             # ==== تجميع بيانات الحجز طبقاً للفورم اللي عندك ====
             data = form.cleaned_data
             name             = data.get('full_name', '')
@@ -246,6 +268,18 @@ def general_booking_view(request):
         if form.is_valid():
             # الحجز هيتسجل مباشرة بكل الحقول اللي في الفورم (بما فيها tour)
             booking = form.save()
+            emit_booking_webhook(
+            request,
+            kind="general",
+            source="website:general_booking",
+            extra={
+                "entity": {
+                    "booking_id": booking.id,
+                    "tour_id": (data.get("tour").id if data.get("tour") else None),
+                    "tour_name": str(data.get("tour") or "General Inquiry"),
+                }
+            },
+        )
 
             data = form.cleaned_data
             name             = data.get('full_name', '') or ''
@@ -386,6 +420,21 @@ def category_detail(request, category_id):
             booking = form.save(commit=False)
             booking.category = category
             booking.save()
+            emit_booking_webhook(
+            request,
+            kind="hotel",
+            source="website:category_detail",
+            extra={
+                "entity": {
+                    "booking_id": booking.id,
+                    "category_id": category.id,
+                    "category_name": category.name,
+                    "hotel_id": (hotel_obj.id if hasattr(hotel_obj, "id") else None),
+                    "hotel_name": str(hotel_obj or ""),
+                }
+            },
+        )
+
 
             # ===== Helper =====
             def pick(data, *keys, default=''):
@@ -598,6 +647,24 @@ def transfers_booking(request):
             return JsonResponse({"success": False, "error": "Invalid CAPTCHA"})
         # --- ^ نهاية الجزء الجديد ^ ---
         data = request.POST
+        emit_booking_webhook(
+    request,
+    kind="transfer",
+    source="website:transfers",
+    extra={
+        "entity": {
+            "pickup": pickup,
+            "pickup_lat": pickup_lat,
+            "pickup_lon": pickup_lon,
+            "dropoff": dropoff,
+            "dropoff_lat": drop_lat,
+            "dropoff_lon": drop_lon,
+            "date": date,
+            "time": time,
+        }
+    },
+)
+
 
         # ==== بيانات الفورم ====
         name        = data.get("full_name", "")
