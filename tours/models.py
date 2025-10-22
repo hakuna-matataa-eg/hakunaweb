@@ -16,7 +16,10 @@ class Category(models.Model):
         related_name="featured_in_categories",
         help_text="اختر الفنادق المميزة التي تريد عرضها في صفحة هذه المدينة."
     )
-
+    show_in_categories = models.BooleanField(
+        default=True, 
+        help_text="✅ اعرض هذه الفئة في قائمة الفئات بالصفحة الرئيسية"
+    )
     def __str__(self):
         return self.name
     

@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const card = this.closest('.hotel-card');
 
                 const name = card.dataset.name;
+                const price = card.dataset.price; // <-- أضف هذا السطر
                 const stars = parseInt(card.dataset.stars);
                 const images = JSON.parse(card.dataset.images);
                 const amenities = JSON.parse(card.dataset.amenities);
@@ -95,7 +96,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 let starsHTML = '<p class="hotel-stars">';
                 for(let i = 0; i < 5; i++) { starsHTML += `<i class="fa-star ${i < stars ? 'fas' : 'far'}"></i>`; }
                 starsHTML += '</p>';
-
+                let priceHTML = '';
+                if (price) {
+                    priceHTML = `<p class="hotel-price">Starts from <span>$${price}</span> / night</p>`;
+                }
                 let amenitiesHTML = '<div class="hotel-amenities"><h5>Amenities</h5><ul>';
                 amenities.forEach(amenity => { amenitiesHTML += `<li><i class="${amenity.icon}"></i> ${amenity.name}</li>`; });
                 amenitiesHTML += '</ul></div>';
@@ -110,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>`;
                 }
 
-                hotelModalBody.innerHTML = `${carouselHTML}${starsHTML}<p>${description}</p><hr><div class="prose-content">${details}</div>${amenitiesHTML}`;
+                hotelModalBody.innerHTML = `${carouselHTML}<div class="hotel-meta">${starsHTML}${priceHTML}</div><p>${description}</p><hr><div class="prose-content">${details}</div>${amenitiesHTML}`;
 
                 hotelModal.show();
             } catch (e) {

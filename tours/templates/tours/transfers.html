@@ -1,105 +1,89 @@
 {% extends 'tours/base.html' %}
+{% load static %}
+{% load i18n %}
 
 {% block content %}
 
-<!-- =======================
-     Banner
-======================= -->
 <section class="transfer-banner text-center text-white d-flex align-items-center" 
          style="background: url('/static/images/transfer-banner.jpg') center/cover no-repeat; height: 350px;">
   <div class="container">
-    <h1 class="fw-bold display-4">Book Your Transfer</h1>
-    <p class="lead fs-4">Comfortable rides between Egypt’s top destinations.<br>Fast, safe, and hassle-free.</p>
+    <h1 class="fw-bold display-4">{% trans "Book Your Transfer" %}</h1>
+    <p class="lead fs-4">{% blocktrans %}Comfortable rides between Egypt’s top destinations.<br>Fast, safe, and hassle-free.{% endblocktrans %}</p>
   </div>
 </section>
 
- 
-
-<!-- =======================
-     Main Section
-======================= -->
 <section class="transfer-form-section py-5">
   <div class="container">
     <div class="row">
       
-      <!-- Form Section -->
-<div class="col-lg-8">
+      <div class="col-lg-8">
   <form id="transferForm" class="transfer-form" method="POST" action="{% url 'transfers_booking' %}">
     {% csrf_token %}
 
-    <h2 class="mb-4">Reserve Your Ride</h2>
+    <h2 class="mb-4">{% trans "Reserve Your Ride" %}</h2>
 
-    <!-- Full Name -->
     <div class="form-group mb-3">
-      <label for="full_name">Full Name</label>
+      <label for="full_name">{% trans "Full Name" %}</label>
       <input type="text" id="full_name" name="full_name" class="form-control" required>
     </div>
 
-    <!-- Email -->
     <div class="form-group mb-3">
-      <label for="email">Email</label>
+      <label for="email">{% trans "Email" %}</label>
       <input type="email" id="email" name="email" class="form-control" required>
     </div>
 
-    <!-- Phone -->
     <div class="form-group mb-3">
-      <label for="phone">Phone Number</label>
+      <label for="phone">{% trans "Phone Number" %}</label>
       <input type="text" id="phone" name="phone" class="form-control" required>
     </div>
 
-    <!-- Pickup -->
     <div class="form-group mb-3">
-      <label for="pickupInput">Pickup Location</label>
+      <label for="pickupInput">{% trans "Pickup Location" %}</label>
       <div class="input-group">
-        <input type="text" id="pickupInput" name="pickup" placeholder="Enter pickup location" class="form-control" required>
+        <input type="text" id="pickupInput" name="pickup" placeholder="{% trans 'Enter pickup location' %}" class="form-control" required>
         <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#mapModal" onclick="setActiveField('pickup')">
-          Open Map
+          {% trans "Open Map" %}
         </button>
       </div>
     </div>
 
-    <!-- Drop-off -->
     <div class="form-group mb-3">
-      <label for="dropoffInput">Drop-off Location</label>
+      <label for="dropoffInput">{% trans "Drop-off Location" %}</label>
       <div class="input-group">
-        <input type="text" id="dropoffInput" name="dropoff" placeholder="Enter drop-off location" class="form-control" required>
+        <input type="text" id="dropoffInput" name="dropoff" placeholder="{% trans 'Enter drop-off location' %}" class="form-control" required>
         <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#mapModal" onclick="setActiveField('dropoff')">
-          Open Map
+          {% trans "Open Map" %}
         </button>
       </div>
     </div>
 
-    <!-- Date & Time -->
     <div class="row">
       <div class="col-md-6 mb-3">
-        <label for="date">Date</label>
+        <label for="date">{% trans "Date" %}</label>
         <input type="date" id="date" name="date" class="form-control" required>
       </div>
       <div class="col-md-6 mb-3">
-        <label for="time">Time</label>
+        <label for="time">{% trans "Time" %}</label>
         <input type="time" id="time" name="time" class="form-control" required>
       </div>
     </div>
 
-    <!-- Passengers -->
     <div class="form-group mb-3">
-      <label for="passengers">Number of Passengers</label>
+      <label for="passengers">{% trans "Number of Passengers" %}</label>
       <input type="number" id="passengers" name="passengers" min="1" value="1" class="form-control" required>
     </div>
 
-    <!-- Car Type -->
     <div class="form-group mb-3">
-      <label for="car_type">Car Type</label>
+      <label for="car_type">{% trans "Car Type" %}</label>
       <select id="car_type" name="car_type" class="form-control" required>
-        <option value="" disabled selected>Select car type</option>
-        <option value="sedan" data-rate="50">Sedan (2-3 pax) – 50 EGP/km</option>
-        <option value="van" data-rate="70">Van (5-7 pax) – 70 EGP/km</option>
-        <option value="minibus" data-rate="90">MiniBus (10-15 pax) – 90 EGP/km</option>
-        <option value="vip" data-rate="150">VIP (Mercedes / BMW) – 150 EGP/km</option>
+        <option value="" disabled selected>{% trans "Select car type" %}</option>
+        <option value="sedan" data-rate="50">{% trans "Sedan (2-3 pax) – 50 EGP/km" %}</option>
+        <option value="van" data-rate="70">{% trans "Van (5-7 pax) – 70 EGP/km" %}</option>
+        <option value="minibus" data-rate="90">{% trans "MiniBus (10-15 pax) – 90 EGP/km" %}</option>
+        <option value="vip" data-rate="150">{% trans "VIP (Mercedes / BMW) – 150 EGP/km" %}</option>
       </select>
     </div>
 
-    <!-- Hidden fields for distance, price & coordinates -->
     <input type="hidden" name="distance" id="hidden_distance" required>
     <input type="hidden" name="price" id="hidden_price" required>
     <input type="hidden" name="pickup_lat" id="pickup_lat" required>
@@ -108,36 +92,36 @@
     <input type="hidden" name="dropoff_lon" id="dropoff_lon" required>
 
     <div class="price-box p-3 border rounded mb-3">
-      <p>Estimated Price: <span id="price">—</span> EGP</p>
-      <p>Distance: <span id="distance">—</span> km</p>
+      <p>{% trans "Estimated Price:" %} <span id="price">—</span> EGP</p>
+      <p>{% trans "Distance:" %} <span id="distance">—</span> km</p>
     </div>
 
     <div class="form-group mb-3 d-flex justify-content-center">
         {{ form.captcha }}
     </div>
-    <button type="button" id="submitBtn" class="btn btn-warning w-100">Book Now</button>
+    <button type="button" id="submitBtn" class="btn btn-warning w-100">{% trans "Book Now" %}</button>
   </form>
 </div>
 
-<!-- ✅ Success Message -->
-<div id="successMessage" class="alert alert-success text-center fs-4" style="display:none;">
-  🎉 Your booking has been confirmed! We will contact you shortly.
+<div id="successMessage" class="alert alert-success text-center fs-4" style="display:none;" 
+     data-trans-error="{% trans 'Something went wrong. Please try again.' %}"
+     data-trans-sending-error="{% trans 'Error sending booking request.' %}"
+>
+  🎉 {% trans "Your booking has been confirmed! We will contact you shortly." %}
 </div>
 
-        
-      <!-- Sidebar -->
       <div class="col-lg-4">
         <div class="bg-white p-4 rounded shadow-sm">
-          <h3 class="fw-bold text-dark mb-4">Available Cities</h3>
+          <h3 class="fw-bold text-dark mb-4">{% trans "Available Cities" %}</h3>
           <ul class="list-unstyled fs-5">
-            <li class="fw-bold text-success">✅ Hurghada</li>
-            <li class="text-muted">🚧 Cairo (Coming Soon)</li>
-            <li class="text-muted">🚧 Sharm El-Sheikh (Coming Soon)</li>
-            <li class="text-muted">🚧 Luxor (Coming Soon)</li>
-            <li class="text-muted">🚧 El Gouna (Coming Soon)</li>
-            <li class="text-muted">🚧 Marsa Alam (Coming Soon)</li>
+            <li class="fw-bold text-success">✅ {% trans "Hurghada" %}</li>
+            <li class="text-muted">🚧 {% trans "Cairo" %} ({% trans "Coming Soon" %})</li>
+            <li class="text-muted">🚧 {% trans "Sharm El-Sheikh" %} ({% trans "Coming Soon" %})</li>
+            <li class="text-muted">🚧 {% trans "Luxor" %} ({% trans "Coming Soon" %})</li>
+            <li class="text-muted">🚧 {% trans "El Gouna" %} ({% trans "Coming Soon" %})</li>
+            <li class="text-muted">🚧 {% trans "Marsa Alam" %} ({% trans "Coming Soon" %})</li>
           </ul>
-          <p class="small text-muted mt-3">More destinations will be available soon across Egypt.</p>
+          <p class="small text-muted mt-3">{% trans "More destinations will be available soon across Egypt." %}</p>
         </div>
       </div>
 
@@ -145,41 +129,39 @@
   </div>
 </section>
 
-
-<!-- ===============================
-     Modal with Map
-=============================== -->
 <div class="modal fade" id="mapModal" tabindex="-1" aria-hidden="true">
   <div class="modal-dialog modal-fullscreen-sm-down modal-lg modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Select Location</h5>
+        <h5 class="modal-title">{% trans "Select Location" %}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
       <div class="modal-body">
-        <input type="text" id="mapSearchInput" placeholder="Search on map..." class="form-control mb-2">
+        <input type="text" id="mapSearchInput" placeholder="{% trans 'Search on map...' %}" class="form-control mb-2">
         <ul id="searchResults" class="list-group mb-3"></ul>
         <div id="map" style="height: 500px;"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Done</button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">{% trans "Done" %}</button>
       </div>
     </div>
   </div>
 </div>
 
-
-<!-- Leaflet CSS & JS -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 
-<!-- Routing -->
 <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
 <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
 
 <script>
 let activeField = null;
 let map, pickupMarker, dropoffMarker, control;
+
+// Translation strings from Django
+const translations = {
+    selectedOnMap: "{% trans 'Selected on map' %}"
+};
 
 const pickupIcon = L.icon({
   iconUrl: "https://cdn-icons-png.flaticon.com/512/684/684908.png",
@@ -206,7 +188,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }).addTo(map);
 
   map.on("click", function(e) {
-    setMarker(e.latlng.lat, e.latlng.lng, "Selected on map");
+    setMarker(e.latlng.lat, e.latlng.lng, translations.selectedOnMap);
   });
 });
 
@@ -281,11 +263,11 @@ function calculateRoute() {
 // ✅ زرار Book Now
 document.getElementById("submitBtn").addEventListener("click", function() {
   let form = document.getElementById("transferForm");
+  const successMessageDiv = document.getElementById("successMessage");
 
-  // تحقق من إن كل الحقول required متملة
   if (!form.checkValidity()) {
-    form.reportValidity(); // هيظهر رسائل الخطأ الافتراضية للمتصفح
-    return; // وقف الإرسال
+    form.reportValidity();
+    return;
   }
 
   let formData = new FormData(form);
@@ -300,22 +282,20 @@ document.getElementById("submitBtn").addEventListener("click", function() {
   .then(res => res.json())
   .then(data => {
     if (data.success) {
-      form.style.display = "none"; // اخفي الفورم
-      document.getElementById("successMessage").style.display = "block"; // أظهر الرسالة
+      form.style.display = "none";
+      successMessageDiv.style.display = "block";
     } else {
-      alert("❌ Something went wrong. Please try again.");
+      alert("❌ " + (successMessageDiv.dataset.transError || "Something went wrong. Please try again."));
     }
   })
   .catch(err => {
     console.error(err);
-    alert("❌ Error sending booking request.");
+    alert("❌ " + (successMessageDiv.dataset.transSendingError || "Error sending booking request."));
   });
 });
-
 
 // ✅ تحديث السعر لما يتغير نوع العربية
 document.getElementById("car_type").addEventListener("change", calculateRoute);
 </script>
-
 
 {% endblock %}

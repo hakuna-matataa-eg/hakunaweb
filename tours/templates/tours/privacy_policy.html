@@ -1,5 +1,6 @@
 {% extends 'tours/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 
@@ -7,51 +8,51 @@
     <div class="row">
         <div class="col-lg-10 mx-auto">
 
-            <p class="text-muted"><strong>Effective Date:</strong> July 27, 2025</p>
-            <p>At Hakuna Matata Tours, your privacy is our priority. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and booking services.</p>
+            <p class="text-muted"><strong>{% trans "Effective Date:" %}</strong> {% trans "July 27, 2025" %}</p>
+            <p>{% blocktrans %}At Hakuna Matata Tours, your privacy is our priority. This Privacy Policy explains how we collect, use, and protect your personal information when you use our website and booking services.{% endblocktrans %}</p>
             <hr>
 
             <div class="legal-section">
-                <h2><span class="icon">📌</span> 1. Information We Collect</h2>
+                <h2><span class="icon">📌</span> 1. {% trans "Information We Collect" %}</h2>
                 <ul>
-                    <li><strong>Personal Data:</strong> Name, email, phone number, address, booking preferences.</li>
-                    <li><strong>Usage Data:</strong> IP address, browser type, device information, and pages visited.</li>
-                    <li><strong>Booking Details:</strong> Dates, selected hotels/tours, and any additional comments you submit.</li>
+                    <li><strong>{% trans "Personal Data:" %}</strong> {% trans "Name, email, phone number, address, booking preferences." %}</li>
+                    <li><strong>{% trans "Usage Data:" %}</strong> {% trans "IP address, browser type, device information, and pages visited." %}</li>
+                    <li><strong>{% trans "Booking Details:" %}</strong> {% trans "Dates, selected hotels/tours, and any additional comments you submit." %}</li>
                 </ul>
             </div>
 
             <div class="legal-section">
-                <h2><span class="icon">💡</span> 2. How We Use Your Information</h2>
+                <h2><span class="icon">💡</span> 2. {% trans "How We Use Your Information" %}</h2>
                 <ul>
-                    <li>To confirm and manage bookings.</li>
-                    <li>To communicate with you regarding your inquiry or booking.</li>
-                    <li>To improve our website and services.</li>
-                    <li>To send promotional offers (only if you opt-in).</li>
+                    <li>{% trans "To confirm and manage bookings." %}</li>
+                    <li>{% trans "To communicate with you regarding your inquiry or booking." %}</li>
+                    <li>{% trans "To improve our website and services." %}</li>
+                    <li>{% trans "To send promotional offers (only if you opt-in)." %}</li>
                 </ul>
             </div>
 
             <div class="legal-section">
-                <h2><span class="icon">🔐</span> 3. Data Protection</h2>
-                <p>We implement strict security measures to protect your data and ensure it is not lost, misused, or accessed without authorization.</p>
+                <h2><span class="icon">🔐</span> 3. {% trans "Data Protection" %}</h2>
+                <p>{% trans "We implement strict security measures to protect your data and ensure it is not lost, misused, or accessed without authorization." %}</p>
             </div>
 
             <div class="legal-section">
-                <h2><span class="icon">🤝</span> 4. Sharing Your Information</h2>
-                <p>We do not sell or rent your data. Your information is shared only with trusted partners (such as hotels or activity providers) as necessary to fulfill your booking.</p>
+                <h2><span class="icon">🤝</span> 4. {% trans "Sharing Your Information" %}</h2>
+                <p>{% trans "We do not sell or rent your data. Your information is shared only with trusted partners (such as hotels or activity providers) as necessary to fulfill your booking." %}</p>
             </div>
 
             <div class="legal-section">
-                <h2><span class="icon">📬</span> 5. Your Rights</h2>
-                <p>You can request access to, update, or delete your personal data at any time by contacting us at:</p>
+                <h2><span class="icon">📬</span> 5. {% trans "Your Rights" %}</h2>
+                <p>{% blocktrans %}You can request access to, update, or delete your personal data at any time by contacting us at:{% endblocktrans %}</p>
                 <p class="email-box">
                 <i class="fas fa-envelope"></i>
-                <a href="mailto:hakunamatata.egypt1@gmail.com">hakunamatata.egypt1@gmail.com</a>
+                <a href="mailto:info@hakuna-matataa.com">info@hakuna-matataa.com</a>
             </p>
             </div>
 
             <div class="legal-section">
-                <h2><span class="icon">🍪</span> 6. Cookies</h2>
-                <p>Our site uses cookies to enhance your experience. You can control cookie preferences through your browser settings.</p>
+                <h2><span class="icon">🍪</span> 6. {% trans "Cookies" %}</h2>
+                <p>{% trans "Our site uses cookies to enhance your experience. You can control cookie preferences through your browser settings." %}</p>
             </div>
 
         </div>

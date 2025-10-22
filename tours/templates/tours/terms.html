@@ -1,57 +1,64 @@
 {% extends 'tours/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block content %}
 <div class="container py-5">
     <div class="row">
         <div class="col-lg-10 mx-auto">
-            <p class="text-muted"><strong>Last Updated:</strong> July 27, 2025</p>
-            <p>By accessing and using the Hakuna Matata Tours website, you agree to the following Terms & Conditions:</p>
+            <p class="text-muted"><strong>{% trans "Last Updated:" %}</strong> {% trans "July 27, 2025" %}</p>
+            <p>{% trans "By accessing and using the Hakuna Matata Tours website, you agree to the following Terms & Conditions:" %}</p>
             <hr>
+
+            <div class="legal-section">
+                <h2>{% trans "Company Information" %}</h2>
+                <p>{% blocktrans %}This website is operated by <strong>Capiton for Tourism Services</strong>, an officially registered company in Egypt.{% endblocktrans %}</p>
+                <p><strong>{% trans "Commercial Registration Number:" %}</strong> 268420</p>
+            </div>
 
             <div class="section-title">
                 <i class="fas fa-calendar-check"></i>
-                <h4>1. Booking Terms</h4>
+                <h4>1. {% trans "Booking Terms" %}</h4>
             </div>
             <ul>
-                <li>All bookings are subject to availability and confirmation.</li>
-                <li>A deposit or full payment may be required at the time of booking.</li>
-                <li>Any special requests (e.g., hotel preferences) are subject to availability.</li>
+                <li>{% trans "All bookings are subject to availability and confirmation." %}</li>
+                <li>{% trans "A deposit or full payment may be required at the time of booking." %}</li>
+                <li>{% trans "Any special requests (e.g., hotel preferences) are subject to availability." %}</li>
             </ul>
 
             <div class="section-title">
                 <i class="fas fa-undo"></i>
-                <h4>2. Cancellation & Refunds</h4>
+                <h4>2. {% trans "Cancellation & Refunds" %}</h4>
             </div>
             <ul>
-                <li>Cancellation policies vary depending on the service or partner.</li>
-                <li>Refunds (if applicable) will be processed within <strong>14-30 business days</strong>.</li>
-                <li>No-shows or last-minute cancellations may result in partial or no refund.</li>
+                <li>{% trans "Cancellation policies vary depending on the service or partner." %}</li>
+                <li>{% blocktrans %}Refunds (if applicable) will be processed within <strong>14-30 business days</strong>.{% endblocktrans %}</li>
+                <li>{% trans "No-shows or last-minute cancellations may result in partial or no refund." %}</li>
             </ul>
 
             <div class="section-title">
                 <i class="fas fa-user-check"></i>
-                <h4>3. User Responsibilities</h4>
+                <h4>3. {% trans "User Responsibilities" %}</h4>
             </div>
-            <p>You agree to provide accurate information and not use the site for unlawful purposes. Misuse may lead to restricted access.</p>
+            <p>{% trans "You agree to provide accurate information and not use the site for unlawful purposes. Misuse may lead to restricted access." %}</p>
 
             <div class="section-title">
                 <i class="fas fa-shield-alt"></i>
-                <h4>4. Liability Disclaimer</h4>
+                <h4>4. {% trans "Liability Disclaimer" %}</h4>
             </div>
-            <p>Hakuna Matata Tours is not liable for unforeseen circumstances, including changes by third-party providers, delays, or natural events. We aim to assist but are not responsible for external factors.</p>
+            <p>{% trans "Hakuna Matata Tours is not liable for unforeseen circumstances, including changes by third-party providers, delays, or natural events. We aim to assist but are not responsible for external factors." %}</p>
 
             <div class="section-title">
                 <i class="fas fa-copyright"></i>
-                <h4>5. Intellectual Property</h4>
+                <h4>5. {% trans "Intellectual Property" %}</h4>
             </div>
-            <p>All content, logos, and images on this site are owned by Hakuna Matata Tours. Unauthorized use is prohibited.</p>
+            <p>{% trans "All content, logos, and images on this site are owned by Capiton for Tourism Services. Unauthorized use is prohibited." %}</p>
 
             <div class="section-title">
                 <i class="fas fa-edit"></i>
-                <h4>6. Modifications</h4>
+                <h4>6. {% trans "Modifications" %}</h4>
             </div>
-            <p>We reserve the right to update these terms at any time. Changes will be reflected on this page.</p>
+            <p>{% trans "We reserve the right to update these terms at any time. Changes will be reflected on this page." %}</p>
 
         </div>
     </div>

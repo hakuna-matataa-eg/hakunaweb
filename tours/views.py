@@ -23,47 +23,61 @@ from .forms import BookingForm, ContactForm, GeneralBookingForm, CategoryBooking
 # ==========================================================
 
 # tours/views.py
-
 def home(request):
     """
     View for the home page with separated tour types.
     """
-    # جلب الرحلات المميزة الخاصة بالنايل كروز فقط
+    
+    # ======== التعديلات هنا ========
+
+    # 1. جلب النايل كروز (كما هي)
     nile_cruise_tours = Tour.objects.filter(
-        category__name__icontains="Nile Cruise", 
+        category__name_en__icontains="Nile Cruise", 
         is_featured=True
     )
     
-    # جلب كل الرحلات الساحلية المميزة (أي رحلة ليست نايل كروز)
+    # 2. جلب الدهبيات (هذا هو السطر الذي كان ناقصاً)
+    dahabiya_tours = Tour.objects.filter(
+        category__name_en__icontains="Dahabiya", # <-- تأكد من الاسم الإنجليزي للفئة
+        is_featured=True
+    )
+
+    # 3. جلب الرحلات الساحلية (هنا تم تعديل الاستثناء)
     coastal_tours = Tour.objects.exclude(
-        category__name__icontains="Nile Cruise"
+        Q(category__name_en__icontains="Nile Cruise") |
+        Q(category__name_en__icontains="Dahabiya")
     ).filter(is_featured=True)
     
-    # جلب كل الفئات لعرضها في قسم الكاتيجوري
-    categories = Category.objects.all()
+    # 4. جلب الفئات (هذا السطر صحيح كما كتبته)
+    categories = Category.objects.filter(show_in_categories=True)
 
     # --- هذا هو الجزء الجديد الذي يصلح المشكلة ---
-    # تجهيز الصور الرئيسية لكل رحلة في القائمتين
+    # تجهيز الصور الرئيسية لكل رحلة في القوائم الثلاثة
+
     for tour in nile_cruise_tours:
         package = tour.packages.first()
         if package:
-            # First, prepare the list of all images for this package
             package.all_package_images = list(package.boats.all().first().images.all()) if package.boats.exists() and package.boats.first() else []
             package.all_package_images.extend(list(package.hotels.all().first().images.all()) if package.hotels.exists() and package.hotels.first() else [])
-            
-            # Then, set the main tour image from that list
             tour.main_tour_image = package.all_package_images[0].image if package.all_package_images else None
         else:
             tour.main_tour_image = None
             
+    # (إضافة تجهيز الصور للدهبيات - الآن سيعمل)
+    for tour in dahabiya_tours:
+        package = tour.packages.first()
+        if package:
+            package.all_package_images = list(package.boats.all().first().images.all()) if package.boats.exists() and package.boats.first() else []
+            package.all_package_images.extend(list(package.hotels.all().first().images.all()) if package.hotels.exists() and package.hotels.first() else [])
+            tour.main_tour_image = package.all_package_images[0].image if package.all_package_images else None
+        else:
+            tour.main_tour_image = None
+
     for tour in coastal_tours:
         package = tour.packages.first()
         if package:
-            # First, prepare the list of all images for this package
             package.all_package_images = list(package.boats.all().first().images.all()) if package.boats.exists() and package.boats.first() else []
             package.all_package_images.extend(list(package.hotels.all().first().images.all()) if package.hotels.exists() and package.hotels.first() else [])
-
-            # Then, set the main tour image from that list
             tour.main_tour_image = package.all_package_images[0].image if package.all_package_images else None
         else:
             tour.main_tour_image = None
@@ -71,6 +85,7 @@ def home(request):
 
     context = {
         'nile_cruise_tours': nile_cruise_tours,
+        'dahabiya_tours': dahabiya_tours, # <-- (هذا هو السطر الذي كان ناقصاً)
         'coastal_tours': coastal_tours,
         'categories': categories,
     }
@@ -412,31 +427,25 @@ def category_detail(request, category_id):
     hotels_in_category = category.featured_hotels.all()
     gallery_images = category.gallery_images.all()
     activities_in_category = category.activities.all()
+    
+    # هذا هو القسم الجانبي (سنبقيه كما هو)
     featured_tours = Tour.objects.filter(category=category, is_featured=True)[:3]
 
+    # ======== الإضافة الجديدة ========
+    # هنا نجلب كل الرحلات (مثل السفاري واليخت) التابعة لهذه الفئة
+    # ونستثني منها الرحلات المميزة حتى لا تتكرر
+    main_tours = Tour.objects.filter(category=category).exclude(
+        id__in=featured_tours.values_list('id', flat=True)
+    )
     if request.method == 'POST':
         form = CategoryBookingForm(request.POST, hotels=hotels_in_category)
         if form.is_valid():
-            booking = form.save(commit=False)
-            booking.category = category
-            booking.save()
-            emit_booking_webhook(
-            request,
-            kind="hotel",
-            source="website:category_detail",
-            extra={
-                "entity": {
-                    "booking_id": booking.id,
-                    "category_id": category.id,
-                    "category_name": category.name,
-                    "hotel_id": (hotel_obj.id if hasattr(hotel_obj, "id") else None),
-                    "hotel_name": str(hotel_obj or ""),
-                }
-            },
-        )
+            
+            # ======== التعديل هنا (تم نقل هذا الكود للأعلى) ========
+            # --- 1. يجب أن نحصل على البيانات أولاً ---
+            data = form.cleaned_data
 
-
-            # ===== Helper =====
+            # --- 2. تعريف دالة المساعدة ---
             def pick(data, *keys, default=''):
                 for k in keys:
                     if k in data:
@@ -445,8 +454,35 @@ def category_detail(request, category_id):
                             return v
                 return default
 
-            data = form.cleaned_data
+            # --- 3. استخراج hotel_obj (الآن هو معرف) ---
+            hotel_obj = pick(data, 'hotel', 'selected_hotel', 'hotel_name', default='')
+            hotel_name = str(hotel_obj or '').replace(' (None)', '')
+            # ======== نهاية الكود المنقول ========
 
+
+            # --- 4. الآن نقوم بحفظ الحجز ---
+            booking = form.save(commit=False)
+            booking.category = category
+            booking.save()
+
+            # --- 5. الآن نستدعي الـ Webhook (لأن hotel_obj معرف) ---
+            emit_booking_webhook(
+                request,
+                kind="hotel",
+                source="website:category_detail",
+                extra={
+                    "entity": {
+                        "booking_id": booking.id,
+                        "category_id": category.id,
+                        "category_name": category.name,
+                        "hotel_id": (hotel_obj.id if hasattr(hotel_obj, "id") else None),
+                        "hotel_name": str(hotel_obj or ""),
+                    }
+                },
+            )
+
+            # --- 6. باقي كود الإيميلات (سيعمل لأن data معرفة) ---
+            
             # ===== Exact field names from your form (with safe fallbacks) =====
             name   = pick(data, 'full_name', 'name', 'customer_name', default='')
             email  = pick(data, 'email', 'customer_email', default='')
@@ -456,9 +492,6 @@ def category_detail(request, category_id):
             number_of_days = pick(data, 'number_of_days', 'nights', 'days', default='')
             adults         = pick(data, 'adults', 'num_adults', 'adults_count', default=0) or 0
             children       = pick(data, 'children', 'num_children', 'children_count', default=0) or 0
-
-            hotel_obj   = pick(data, 'hotel', 'selected_hotel', 'hotel_name', default='')
-            hotel_name  = str(hotel_obj or '').replace(' (None)', '')
 
             address = pick(data, 'address', 'location', default='')
             notes   = pick(data, 'comment', 'message', 'notes', 'special_requests', default='')
@@ -571,34 +604,10 @@ def category_detail(request, category_id):
         'gallery_images': gallery_images,
         'activities': activities_in_category,
         'featured_tours': featured_tours,
+        'main_tours': main_tours,         # <-- الإضافة الجديدة للقسم الرئيسي
         'form': form,
     }
     return render(request, 'tours/category_detail.html', context)
-
-def all_tours(request):
-    tours_list = Tour.objects.all().order_by('id')
-    categories = Category.objects.all()
-
-    category_filter = request.GET.get('category')
-    if category_filter:
-        tours_list = tours_list.filter(category__id=category_filter)
-
-    paginator = Paginator(tours_list, 6)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
-        html = render_to_string(
-            'tours/tour_card_snippet.html',
-            {'tours': page_obj}
-        )
-        return JsonResponse({'html': html, 'has_next': page_obj.has_next()})
-
-    context = {
-        'tours': page_obj,
-        'categories': categories,
-    }
-    return render(request, 'tours/all_tours.html', context)
 
 def search_results(request):
     query = request.GET.get('q')

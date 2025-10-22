@@ -1,0 +1,933 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-10-21 18:32+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: .\hakuna_matata_project\settings.py:102
+msgid "English"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:103
+msgid "Arabic"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:104
+msgid "Spanish"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:105
+msgid "French"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:106
+msgid "German"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:107
+msgid "Russian"
+msgstr ""
+
+#: .\hakuna_matata_project\settings.py:108
+msgid "Chinese"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:5 .\tours\templates\tours\base.html:42
+#: .\tours\templates\tours\base.html:95
+msgid "About Us"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:11
+msgid "About Our Company"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:12
+msgid "Discover the story behind our passion for travel."
+msgstr ""
+
+#: .\tours\templates\tours\about.html:23
+msgid "Our Story"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:24
+msgid ""
+"Hakuna Matata was born from a simple idea: to share the timeless magic of "
+"Egypt with the world, not just as tourists, but as fellow storytellers."
+msgstr ""
+
+#: .\tours\templates\tours\about.html:25
+msgid ""
+"We are a team of passionate explorers, historians, and local guides "
+"dedicated to crafting authentic, unforgettable journeys. From the golden "
+"sands of the desert to the vibrant corals of the Red Sea, our mission is to "
+"guide you through the heart of Egypt, where every wave whispers a legend."
+msgstr ""
+
+#: .\tours\templates\tours\about.html:33 .\tours\templates\tours\index.html:97
+msgid "Why People Choose Us"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:37 .\tours\templates\tours\index.html:101
+msgid "Expert Support 24/7"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:38
+msgid ""
+"Seamless assistance for a hassle-free adventure, our team is always "
+"available for you."
+msgstr ""
+
+#: .\tours\templates\tours\about.html:42 .\tours\templates\tours\index.html:106
+msgid "Best Value Trips"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:43
+msgid ""
+"We offer premium, unforgettable experiences at the most competitive and fair "
+"prices."
+msgstr ""
+
+#: .\tours\templates\tours\about.html:47 .\tours\templates\tours\index.html:111
+msgid "Unforgettable Journeys"
+msgstr ""
+
+#: .\tours\templates\tours\about.html:48
+msgid ""
+"Explore Egypt's top historical and cultural sites with our professional "
+"local guides."
+msgstr ""
+
+#: .\tours\templates\tours\all_tours.html:5
+msgid "All Tours"
+msgstr ""
+
+#: .\tours\templates\tours\all_tours.html:10
+msgid "Explore All Our Tours"
+msgstr ""
+
+#: .\tours\templates\tours\all_tours.html:18
+msgid "Filter by Destination"
+msgstr ""
+
+#: .\tours\templates\tours\all_tours.html:22
+msgid "All Destinations"
+msgstr ""
+
+#: .\tours\templates\tours\all_tours.html:42
+msgid "Explore more"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:36
+msgid "Search for a trip..."
+msgstr ""
+
+#: .\tours\templates\tours\base.html:40
+msgid "Home"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:41 .\tours\templates\tours\base.html:97
+msgid "Blog"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:43 .\tours\templates\tours\base.html:96
+msgid "Contact"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:44
+msgid "Transfers"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:52
+msgid "Language"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:84
+msgid ""
+"Hakuna Matata, a brand of Capiton for Tourism Services, offers unforgettable "
+"trips across Egypt’s ancient temples and archaeological wonders with expert "
+"guides, customized tours, and premium services."
+msgstr ""
+
+#: .\tours\templates\tours\base.html:93
+msgid "Quick Links"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:101
+msgid "Support"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:103
+msgid "Privacy Policy"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:104
+msgid "Terms & Conditions"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:108
+#: .\tours\templates\tours\contact.html:35
+msgid "Contact Info"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:111
+#: .\tours\templates\tours\contact.html:38
+msgid "Cairo, Egypt"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:115
+msgid "Capiton for Tourism Services"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:117
+msgid "Official company registered with commercial registration number:"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:126
+msgid "General Inquiry"
+msgstr ""
+
+#: .\tours\templates\tours\base.html:135
+msgid "Submit"
+msgstr ""
+
+#: .\tours\templates\tours\blog_detail.html:20
+#, python-format
+msgid ""
+"By %(post.author.username)s on %(post.created_at|date:\"F d, Y\")s in <a "
+"href=\"#\">%(post.category.name)s</a>"
+msgstr ""
+
+#: .\tours\templates\tours\blog_detail.html:28
+msgid "Related Tours"
+msgstr ""
+
+#: .\tours\templates\tours\blog_detail.html:37
+msgid "View Tour"
+msgstr ""
+
+#: .\tours\templates\tours\blog_detail.html:51
+msgid "Similar Posts"
+msgstr ""
+
+#: .\tours\templates\tours\blog_detail.html:63
+#: .\tours\templates\tours\tour_detail.html:91
+msgid "Tour Categories"
+msgstr ""
+
+#: .\tours\templates\tours\blog_list.html:5
+#: .\tours\templates\tours\blog_list.html:11
+msgid "Our Blog"
+msgstr ""
+
+#: .\tours\templates\tours\blog_list.html:12
+msgid "Stay updated with our latest travel tips and stories from Egypt."
+msgstr ""
+
+#: .\tours\templates\tours\blog_list.html:29
+#, python-format
+msgid "By %(post.author.username)s on %(post.created_at|date:\"F d, Y\")s"
+msgstr ""
+
+#: .\tours\templates\tours\blog_list.html:32
+msgid "Read More"
+msgstr ""
+
+#: .\tours\templates\tours\blog_list.html:40
+msgid "No blog posts yet."
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:6
+msgid "We received your booking – Hakuna Matata"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:26
+#, python-format
+msgid ""
+"Thanks, %(name|default:\"Traveler\")s! We received your booking request."
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:29
+msgid "Our team will contact you shortly to confirm details and next steps."
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:42
+msgid "Tour"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:46
+msgid "Phone"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:50
+msgid "Guests"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:54
+msgid "Package"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:58
+#: .\tours\templates\tours\transfers.html:62
+msgid "Date"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:63
+#: .\tours\templates\tours\tour_detail.html:198
+msgid "Special Requests"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:77
+msgid ""
+"If any detail is incorrect, just reply to this email and tell us the changes."
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:82
+msgid "Visit our website"
+msgstr ""
+
+#: .\tours\templates\tours\booking_confirmation.html:90
+msgid ""
+"Hakuna Matata Tours · You’re receiving this email because you made a booking "
+"request on our website."
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:45
+#, python-format
+msgid "Featured Hotels in %(category.name)s"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:66
+#: .\tours\templates\tours\index.html:41 .\tours\templates\tours\index.html:69
+#: .\tours\templates\tours\search_results.html:33
+msgid "View Details"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:87
+msgid "Top Activities"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:106
+msgid "Book Your Stay"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:111
+#: .\tours\templates\tours\tour_detail.html:170
+#: .\tours\templates\tours\transfers.html:26
+msgid "Full Name"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:115
+#: .\tours\templates\tours\transfers.html:31
+msgid "Email"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:119
+#: .\tours\templates\tours\tour_detail.html:178
+#: .\tours\templates\tours\transfers.html:36
+msgid "Phone Number"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:124
+msgid "Start Date"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:128
+msgid "Number of Days"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:132
+#: .\tours\templates\tours\tour_detail.html:185
+msgid "Adults"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:136
+msgid "Children (Under 6)"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:141
+msgid "Preferred Hotel"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:145
+msgid "Address (Optional)"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:149
+msgid "Additional Comment (Optional)"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:157
+#: .\tours\templates\tours\tour_detail.html:205
+msgid "Submit Inquiry"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:167
+#, python-format
+msgid "Glimpses of %(category.name)s"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:180
+msgid "Featured Trips"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:200
+msgid "Hotel Name"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:206
+#: .\tours\templates\tours\tour_detail.html:282
+msgid "Close"
+msgstr ""
+
+#: .\tours\templates\tours\category_detail.html:207
+#: .\tours\templates\tours\tour_detail.html:143
+#: .\tours\templates\tours\transfers.html:102
+msgid "Book Now"
+msgstr ""
+
+#: .\tours\templates\tours\contact.html:5
+msgid "Contact Us"
+msgstr ""
+
+#: .\tours\templates\tours\contact.html:11
+msgid "Get In Touch"
+msgstr ""
+
+#: .\tours\templates\tours\contact.html:12
+msgid "We'd love to hear from you. Here's how you can reach us."
+msgstr ""
+
+#: .\tours\templates\tours\contact.html:20
+msgid "Send Us a Message"
+msgstr ""
+
+#: .\tours\templates\tours\contact.html:31
+msgid "Send Message"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:5
+msgid "Homepage"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:12
+msgid "Your browser does not support the video tag."
+msgstr ""
+
+#: .\tours\templates\tours\index.html:16
+msgid "Discover Our Unforgettable Experiences in Egypt"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:17
+msgid "Find Your Trip Now"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:25
+msgid "Luxury Nile Cruises: A Journey Through History"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:46
+msgid "No featured Nile cruise tours available at the moment."
+msgstr ""
+
+#: .\tours\templates\tours\index.html:55
+msgid "Dahabiya Nile Cruise"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:74
+msgid "No featured coastal tours available at the moment."
+msgstr ""
+
+#: .\tours\templates\tours\index.html:83
+msgid "Explore by Categories"
+msgstr ""
+
+#: .\tours\templates\tours\index.html:102
+msgid "Seamless assistance for a hassle-free adventure."
+msgstr ""
+
+#: .\tours\templates\tours\index.html:107
+msgid "We offer premium, unforgettable experiences at competitive prices."
+msgstr ""
+
+#: .\tours\templates\tours\index.html:112
+msgid "Explore Egypt's top sites with our professional local guides."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:11
+msgid "Effective Date:"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:11
+#: .\tours\templates\tours\terms.html:9
+msgid "July 27, 2025"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:12
+msgid ""
+"At Hakuna Matata Tours, your privacy is our priority. This Privacy Policy "
+"explains how we collect, use, and protect your personal information when you "
+"use our website and booking services."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:16
+msgid "Information We Collect"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:18
+msgid "Personal Data:"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:18
+msgid "Name, email, phone number, address, booking preferences."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:19
+msgid "Usage Data:"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:19
+msgid "IP address, browser type, device information, and pages visited."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:20
+msgid "Booking Details:"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:20
+msgid "Dates, selected hotels/tours, and any additional comments you submit."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:25
+msgid "How We Use Your Information"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:27
+msgid "To confirm and manage bookings."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:28
+msgid "To communicate with you regarding your inquiry or booking."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:29
+msgid "To improve our website and services."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:30
+msgid "To send promotional offers (only if you opt-in)."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:35
+msgid "Data Protection"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:36
+msgid ""
+"We implement strict security measures to protect your data and ensure it is "
+"not lost, misused, or accessed without authorization."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:40
+msgid "Sharing Your Information"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:41
+msgid ""
+"We do not sell or rent your data. Your information is shared only with "
+"trusted partners (such as hotels or activity providers) as necessary to "
+"fulfill your booking."
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:45
+msgid "Your Rights"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:46
+msgid ""
+"You can request access to, update, or delete your personal data at any time "
+"by contacting us at:"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:54
+msgid "Cookies"
+msgstr ""
+
+#: .\tours\templates\tours\privacy_policy.html:55
+msgid ""
+"Our site uses cookies to enhance your experience. You can control cookie "
+"preferences through your browser settings."
+msgstr ""
+
+#: .\tours\templates\tours\search_results.html:5
+msgid "Search Results for"
+msgstr ""
+
+#: .\tours\templates\tours\search_results.html:11
+msgid "Search Results"
+msgstr ""
+
+#: .\tours\templates\tours\search_results.html:13
+#, python-format
+msgid "Showing results for: <strong>\"%(query)s\"</strong>"
+msgstr ""
+
+#: .\tours\templates\tours\search_results.html:40
+msgid ""
+"Sorry, no tours found matching your search criteria. Please try a different "
+"keyword."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:9
+msgid "Last Updated:"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:10
+msgid ""
+"By accessing and using the Hakuna Matata Tours website, you agree to the "
+"following Terms & Conditions:"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:14
+msgid "Company Information"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:15
+msgid ""
+"This website is operated by <strong>Capiton for Tourism Services</strong>, "
+"an officially registered company in Egypt."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:16
+msgid "Commercial Registration Number:"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:21
+msgid "Booking Terms"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:24
+msgid "All bookings are subject to availability and confirmation."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:25
+msgid "A deposit or full payment may be required at the time of booking."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:26
+msgid ""
+"Any special requests (e.g., hotel preferences) are subject to availability."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:31
+msgid "Cancellation & Refunds"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:34
+msgid "Cancellation policies vary depending on the service or partner."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:35
+msgid ""
+"Refunds (if applicable) will be processed within <strong>14-30 business "
+"days</strong>."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:36
+msgid ""
+"No-shows or last-minute cancellations may result in partial or no refund."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:41
+msgid "User Responsibilities"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:43
+msgid ""
+"You agree to provide accurate information and not use the site for unlawful "
+"purposes. Misuse may lead to restricted access."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:47
+msgid "Liability Disclaimer"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:49
+msgid ""
+"Hakuna Matata Tours is not liable for unforeseen circumstances, including "
+"changes by third-party providers, delays, or natural events. We aim to "
+"assist but are not responsible for external factors."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:53
+msgid "Intellectual Property"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:55
+msgid ""
+"All content, logos, and images on this site are owned by Capiton for Tourism "
+"Services. Unauthorized use is prohibited."
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:59
+msgid "Modifications"
+msgstr ""
+
+#: .\tours\templates\tours\terms.html:61
+msgid ""
+"We reserve the right to update these terms at any time. Changes will be "
+"reflected on this page."
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:10
+msgid "Explore More"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:16
+msgid "Photo Gallery"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:17
+msgid "View All Photos"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:31
+msgid "About This Tour"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:35
+msgid "Daily Itinerary"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:41
+#, python-format
+msgid "Day %(day.day_number)s: %(day.title)s"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:58
+msgid "No detailed itinerary available for this tour yet."
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:64
+msgid "Included Amenities"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:80
+msgid "You May Also Like"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:103
+msgid "Have Questions?"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:125
+msgid "Tour Packages"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:139
+msgid "Sleeps:"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:145
+msgid "Details"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:153
+msgid "No packages available for this tour at the moment."
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:163
+msgid "Inquire About This Tour"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:174
+msgid "Email Address"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:182
+msgid "Country"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:189
+msgid "Children"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:193
+msgid "Select a Package (optional)"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:216
+msgid "All Photos"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:237
+#, python-format
+msgid "%(package.name)s - Details"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:263
+msgid "Includes accommodation in:"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:274
+msgid "Amenities in this Package:"
+msgstr ""
+
+#: .\tours\templates\tours\tour_detail.html:283
+msgid "Book This Package Now"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:10
+msgid "Book Your Transfer"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:11
+msgid ""
+"Comfortable rides between Egypt’s top destinations.<br>Fast, safe, and "
+"hassle-free."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:23
+msgid "Reserve Your Ride"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:41
+msgid "Pickup Location"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:43
+msgid "Enter pickup location"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:45
+#: .\tours\templates\tours\transfers.html:55
+msgid "Open Map"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:51
+msgid "Drop-off Location"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:53
+msgid "Enter drop-off location"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:66
+msgid "Time"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:72
+msgid "Number of Passengers"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:77
+msgid "Car Type"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:79
+msgid "Select car type"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:80
+msgid "Sedan (2-3 pax) – 50 EGP/km"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:81
+msgid "Van (5-7 pax) – 70 EGP/km"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:82
+msgid "MiniBus (10-15 pax) – 90 EGP/km"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:83
+msgid "VIP (Mercedes / BMW) – 150 EGP/km"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:95
+msgid "Estimated Price:"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:96
+msgid "Distance:"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:107
+msgid "Something went wrong. Please try again."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:108
+msgid "Error sending booking request."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:110
+msgid "Your booking has been confirmed! We will contact you shortly."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:115
+msgid "Available Cities"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:117
+msgid "Hurghada"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:118
+msgid "Cairo"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:118
+#: .\tours\templates\tours\transfers.html:119
+#: .\tours\templates\tours\transfers.html:120
+#: .\tours\templates\tours\transfers.html:121
+#: .\tours\templates\tours\transfers.html:122
+msgid "Coming Soon"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:119
+msgid "Sharm El-Sheikh"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:120
+msgid "Luxor"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:121
+msgid "El Gouna"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:122
+msgid "Marsa Alam"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:124
+msgid "More destinations will be available soon across Egypt."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:136
+msgid "Select Location"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:140
+msgid "Search on map..."
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:145
+msgid "Done"
+msgstr ""
+
+#: .\tours\templates\tours\transfers.html:163
+msgid "Selected on map"
+msgstr ""

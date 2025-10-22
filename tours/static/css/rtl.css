@@ -1,0 +1,87 @@
+/* rtl.css - Overrides for Arabic Language */
+
+body {
+    direction: rtl;
+    text-align: right;
+    font-family: 'Tahoma', 'Arial', sans-serif; /* خط مناسب للعربية */
+}
+
+/* عكس اتجاه العناوين والخط السفلي */
+h1, h2, h3, h4, h5, h6 {
+    text-align: right;
+}
+
+h2::after {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+.section-title-left {
+    text-align: right;
+}
+
+.section-title-left::after {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+/* تعديل القائمة العلوية */
+.header .navigation ul li {
+    margin-left: 0;
+    margin-right: 30px;
+}
+
+.dropdown-menu {
+    text-align: right;
+}
+
+.header .logo {
+    margin-left: 20px;
+}
+
+.header-actions {
+    margin-right: auto;
+    margin-left: 0;
+}
+
+
+/* عكس اتجاه الأيقونات والنصوص المتجاورة */
+.feature-item i,
+.contact-info-item i,
+.footer-col p i {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* تعديل الهوامش والـ Padding */
+.col-lg-5.ps-lg-5 {
+    padding-right: 3rem !important;
+    padding-left: 0 !important;
+}
+
+/* تعديل نموذج الحجز */
+.form-label.float-start {
+    float: right !important;
+}
+
+label {
+    text-align: right;
+    display: block;
+}
+
+/* تعديل اتجاه الأزرار والأسهم */
+.prev-arrow {
+    right: 10px;
+    left: auto;
+}
+
+.next-arrow {
+    left: 10px;
+    right: auto;
+}
+
+.blog-card-horizontal .rounded-start {
+    border-radius: 0 0.25rem 0.25rem 0 !important;
+}

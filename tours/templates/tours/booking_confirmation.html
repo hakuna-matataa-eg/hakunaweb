@@ -1,8 +1,9 @@
+{% load i18n %}
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>We received your booking – Hakuna Matata</title>
+  <title>{% trans "We received your booking – Hakuna Matata" %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body style="margin:0;padding:0;background:#f4ecd8;">
@@ -10,7 +11,6 @@
     <tr>
       <td align="center" style="padding:24px 12px;">
         <table role="presentation" cellpadding="0" cellspacing="0" width="640" style="max-width:640px;width:100%;background:#ffffff;border-radius:18px;overflow:hidden;border:1px solid #e7e1cf;box-shadow:0 6px 20px rgba(31,41,55,0.08)">
-          <!-- Header (dark like navbar) -->
           <tr>
             <td align="center" style="background:#242b33;padding:26px 18px;">
               <a href="{{ site_url }}" style="text-decoration:none;display:inline-block;">
@@ -20,19 +20,17 @@
             </td>
           </tr>
 
-          <!-- Title -->
           <tr>
             <td style="padding:22px 24px 4px 24px;">
               <h1 style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:22px;line-height:1.35;color:#1f2937;">
-                Thanks, {{ name|default:"Traveler" }}! We received your booking request.
+                {% blocktrans %}Thanks, {{ name|default:"Traveler" }}! We received your booking request.{% endblocktrans %}
               </h1>
               <p style="margin:8px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#6b7280;">
-                Our team will contact you shortly to confirm details and next steps.
+                {% trans "Our team will contact you shortly to confirm details and next steps." %}
               </p>
             </td>
           </tr>
 
-          <!-- Details card -->
           <tr>
             <td style="padding:14px 24px 10px 24px;">
               <table role="presentation" cellpadding="0" cellspacing="0" width="100%"
@@ -41,28 +39,28 @@
                   <td style="padding:18px;">
                     <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#111827;">
                       <tr>
-                        <td style="padding:7px 0;width:130px;font-weight:bold;color:#3f3f46;">Tour</td>
+                        <td style="padding:7px 0;width:130px;font-weight:bold;color:#3f3f46;">{% trans "Tour" %}</td>
                         <td style="padding:7px 0;">{{ tour_name }}</td>
                       </tr>
                       <tr>
-                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">Phone</td>
+                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">{% trans "Phone" %}</td>
                         <td style="padding:7px 0;">{{ phone|default:"-" }}</td>
                       </tr>
                       <tr>
-                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">Guests</td>
+                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">{% trans "Guests" %}</td>
                         <td style="padding:7px 0;">{{ guests }}</td>
                       </tr>
                       <tr>
-                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">Package</td>
+                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">{% trans "Package" %}</td>
                         <td style="padding:7px 0;">{{ package_name|default:"-" }}</td>
                       </tr>
                       <tr>
-                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">Date</td>
+                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;">{% trans "Date" %}</td>
                         <td style="padding:7px 0;">{{ date|default:"-" }}</td>
                       </tr>
                       {% if special_requests %}
                       <tr>
-                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;vertical-align:top;">Special Requests</td>
+                        <td style="padding:7px 0;font-weight:bold;color:#3f3f46;vertical-align:top;">{% trans "Special Requests" %}</td>
                         <td style="padding:7px 0;">{{ special_requests|linebreaksbr }}</td>
                       </tr>
                       {% endif %}
@@ -73,25 +71,23 @@
             </td>
           </tr>
 
-          <!-- CTA -->
           <tr>
             <td style="padding:16px 24px 18px 24px;">
               <p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;color:#6b7280;">
-                If any detail is incorrect, just reply to this email and tell us the changes.
+                {% trans "If any detail is incorrect, just reply to this email and tell us the changes." %}
               </p>
               <a href="{{ site_url }}"
                  style="background:#d4a650;color:#ffffff;text-decoration:none;font-family:Arial,Helvetica,sans-serif;
                         font-size:14px;border-radius:14px;padding:11px 18px;display:inline-block;box-shadow:0 2px 0 #b48836;">
-                Visit our website
+                {% trans "Visit our website" %}
               </a>
             </td>
           </tr>
 
-          <!-- Footer -->
           <tr>
             <td style="padding:16px 24px 22px 24px;border-top:1px solid #e7e1cf;">
               <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;color:#9ca3af;line-height:1.5;">
-                Hakuna Matata Tours · You’re receiving this email because you made a booking request on our website.
+                {% trans "Hakuna Matata Tours · You’re receiving this email because you made a booking request on our website." %}
               </p>
             </td>
           </tr>

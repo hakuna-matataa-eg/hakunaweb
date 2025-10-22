@@ -1210,16 +1210,16 @@ h3 {
     color: var(--primary-color);
 }
 
-/* Custom Booking Form */
+/* Custom Booking Form (FIXED) */
 .custom-booking-form {
     background-color: #f9f9f9;
     padding: 30px;
     border-radius: 8px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
+    /*
+    تم حذف 'display: grid', 'grid-template-columns: 1fr', و 'gap: 20px'
+    لأننا الآن نستخدم كلاسات Bootstrap 'row' و 'g-3' من ملف الـ HTML مباشرة.
+    */
 }
-
 
 /* Sidebar Gallery (Desktop) */
 .sidebar-gallery-column {
@@ -1716,4 +1716,31 @@ h3 {
   font-size: 16px;
   color: #888;
   margin-top: 15px;
+}
+/* Styling for Hotel Price in Modal */
+.hotel-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+
+.modal-body .hotel-price {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.modal-body .hotel-price span {
+    color: var(--primary-color);
+    font-size: 1.4rem;
+}
+
+.modal-body .hotel-stars {
+    margin: 0;
 }

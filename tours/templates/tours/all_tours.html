@@ -1,12 +1,13 @@
 {% extends 'tours/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}All Tours - Hakuna Matata{% endblock %}
+{% block title %}{% trans "All Tours" %} - Hakuna Matata{% endblock %}
 
 {% block content %}
 <section class="page-banner" style="background-image: url('{% static 'tours/images/blog_banner.jpg' %}');">
     <div class="container">
-        <h1>Explore All Our Tours</h1>
+        <h1>{% trans "Explore All Our Tours" %}</h1>
     </div>
 </section>
 
@@ -14,11 +15,11 @@
     <div class="all-tours-layout">
         
         <aside class="filter-sidebar">
-            <h4>Filter by Destination</h4>
+            <h4>{% trans "Filter by Destination" %}</h4>
             <form method="GET" action="{% url 'all_tours' %}">
                 <ul class="filter-list">
                     <li>
-                        <a href="{% url 'all_tours' %}" class="filter-link">All Destinations</a>
+                        <a href="{% url 'all_tours' %}" class="filter-link">{% trans "All Destinations" %}</a>
                     </li>
                     {% for category in categories %}
                     <li>
@@ -38,7 +39,7 @@
 
                     {% if tours.has_next %}
                     <div class="load-more-container">
-                        <button id="load-more-btn" data-page="{{ tours.next_page_number }}">Explore more</button>
+                        <button id="load-more-btn" data-page="{{ tours.next_page_number }}">{% trans "Explore more" %}</button>
                     </div>
                     {% endif %}
                 </main>        

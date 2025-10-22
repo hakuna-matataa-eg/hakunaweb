@@ -5,9 +5,14 @@ import os
 from decouple import config
 import dj_database_url
 from dotenv import load_dotenv
+from django.utils.translation import gettext_lazy as _ # <-- أضف هذا السطر
 # المسار الأساسي للمشروع
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env")
+# Set the full path for Google credentials
+google_creds = config('GOOGLE_APPLICATION_CREDENTIALS', default=None)
+if google_creds:
+    os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = str(BASE_DIR / google_creds)
 SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "dev-secret")
 
 # --- إعدادات حساسة من .env ---
@@ -27,6 +32,7 @@ ALLOWED_HOSTS = config(
 # --- التطبيقات ---
 INSTALLED_APPS = [
     'tours',
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -36,13 +42,13 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'captcha',  # <--- أضف هذا السطر
-
 ]
 
 # --- الوسيطات ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -88,10 +94,32 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # --- اللغة والتوقيت ---
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+LANGUAGES = [
+    ('en', _('English')),
+    ('ar', _('Arabic')),
+    ('es', _('Spanish')),
+    ('fr', _('French')),
+    ('de', _('German')),
+    ('ru', _('Russian')),
+
+]
+# 2. اللغة الافتراضية
+LANGUAGE_CODE = 'en'
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en' # <-- أضف هذا
+
+# 3. تفعيل الترجمة
+USE_I18N = True
+USE_L10N = True
+USE_TZ = True
+
+# 4. مسارات ملفات الترجمة
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]
 
 # --- إعدادات الملفات الثابتة والميديا ---
 STATIC_URL = '/static/'

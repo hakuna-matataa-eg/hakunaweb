@@ -1,14 +1,15 @@
 {% extends 'tours/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Contact Us - Hakuna Matata Tours{% endblock %}
+{% block title %}{% trans "Contact Us" %} - Hakuna Matata Tours{% endblock %}
 
 {% block content %}
 
 <div class="page-banner" style="background-image: url('{% static 'tours/images/contact_banner.jpg' %}');">
     <div class="container text-center text-white">
-        <h1 class="display-4 fw-bold">Get In Touch</h1>
-        <p class="lead">We'd love to hear from you. Here's how you can reach us.</p>
+        <h1 class="display-4 fw-bold">{% trans "Get In Touch" %}</h1>
+        <p class="lead">{% trans "We'd love to hear from you. Here's how you can reach us." %}</p>
     </div>
 </div>
 
@@ -16,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-7 mb-5 mb-lg-0">
-                <h2 class="section-title-left">Send Us a Message</h2>
+                <h2 class="section-title-left">{% trans "Send Us a Message" %}</h2>
                 {% if messages %}
                     {% for message in messages %}
                         <div class="alert alert-success">{{ message }}</div>
@@ -27,18 +28,18 @@
                     {{ form.as_p }}
                     <div class="d-flex justify-content-center mt-3"> {{ form.captcha }}
                     </div>
-                    <button type="submit" class="btn-primary mt-3">Send Message</button>
+                    <button type="submit" class="btn-primary mt-3">{% trans "Send Message" %}</button>
                 </form>
             </div>
             <div class="col-lg-5 ps-lg-5">
-                <h2 class="section-title-left">Contact Info</h2>
+                <h2 class="section-title-left">{% trans "Contact Info" %}</h2>
                 <div class="contact-info-item">
                     <i class="fas fa-map-marker-alt"></i>
-                    <span>Luxor, Egypt</span>
+                    <span>{% trans "Cairo, Egypt" %}</span>
                 </div>
                 <div class="contact-info-item">
                     <i class="fas fa-envelope"></i>
-                    <span>hakunamatata.egypt1@gmail.com</span>
+                    <span>info@hakuna-matataa.com</span>
                 </div>
                 <div class="contact-info-item">
                     <i class="fab fa-whatsapp"></i>
@@ -47,7 +48,7 @@
                 
                 <div class="mt-4">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d221159.5704381014!2d31.224207949999995!3d30.01633515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14584034f3b552cb%3A0x4642878479e0a650!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1684600000000!5m2!1sen!2seg" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d221164.53235334!2d31.1171881734375!3d30.05961829999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14583fa60b21beeb%3A0x79dfb296e8423bba!2sCairo%2C%20Cairo%20Governorate!5e0!3m2!1sen!2seg!4v1678886575315!5m2!1sen!2seg" 
                         width="100%" 
                         height="250" 
                         style="border:0; border-radius: 8px;" 
