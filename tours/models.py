@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.templatetags.static import static
+from django.urls import reverse
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -25,6 +26,9 @@ class Category(models.Model):
     
     class Meta:
         verbose_name_plural = "Categories"
+    def get_absolute_url(self):
+        # 'category_detail' هو الاسم اللي في tours/urls.py
+        return reverse('category_detail', kwargs={'category_id': self.id})
     def __str__(self):
         return self.name
 
@@ -98,6 +102,9 @@ class Tour(models.Model):
         if self.category and hasattr(self.category, 'image') and self.category.image:
             return self.category.image.url
         return static('images/default-tour.jpg') 
+    def get_absolute_url(self):
+        # 'tour_detail' هو الاسم اللي في tours/urls.py
+        return reverse('tour_detail', kwargs={'tour_id': self.id})
     
 
 class ItineraryDay(models.Model):
@@ -169,6 +176,10 @@ class BlogPost(models.Model):
         ordering = ['-created_at']
     def __str__(self):
         return self.title
+    def get_absolute_url(self):
+        # 'blog_detail' هو الاسم اللي في tours/urls.py
+        return reverse('blog_detail', kwargs={'slug': self.slug})
+    
 class CategoryGalleryImage(models.Model):
     category = models.ForeignKey(Category, related_name='gallery_images', on_delete=models.CASCADE)
     image = models.ImageField(upload_to='categories/gallery/')
